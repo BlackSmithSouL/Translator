@@ -17,7 +17,7 @@ const ActivityIndicator = styled.div`
     height: 2px;
     background-color: ${({ theme }) => theme.colors.primary};
     border-radius: 6px;
-    animation:loading 1s linear infinite alternate; 
+    animation: loading 1s linear infinite alternate; 
 
     @keyframes loading {
         0% {

@@ -31,14 +31,14 @@ export const Confidence: React.FunctionComponent<ConfidenceProps> = ({
             .find(([, languageCode]) => language === languageCode) || []
 
         return detectedLanguage
-            ? '(${detectedLanguage})'
+            ? `(${detectedLanguage})`
             : undefined
     }, [language])
 
     return (
         <Container>
             <Percentage>
-                {confidence && '${confidence}%'}
+                {confidence && `${confidence}%`}
             </Percentage>
             <Language
                 onClick={() =>{

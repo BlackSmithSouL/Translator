@@ -9,7 +9,7 @@ export const Footer = () => {
     return (
         <FooterContainer>
             <CodemaskContainer>
-                &copy; {year} {T.common.companyName}
+                &copy; {year}
             </CodemaskContainer>
             <LinkContainer>
                 <Link

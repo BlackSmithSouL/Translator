@@ -1,7 +1,6 @@
 export type Dictionary = {
     common: {
         autoTranslate: string,
-        companyName: string
     },
     components: {
         app: {
