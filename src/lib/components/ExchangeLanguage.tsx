@@ -24,6 +24,21 @@ export const ExchangeLanguage: React.FunctionComponent<ExchangeLanguageProps> = 
 const ExchangeContainer = styled.div`
     width: 25px;
     height: 25px;
+
+    @media(min-width: ${({ theme }) => theme.media.sm}px) {
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    @media(max-width: ${({ theme }) => theme.media.sm}px) {
+        height: 100px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
 `
 
 const Exchange = styled.img`
