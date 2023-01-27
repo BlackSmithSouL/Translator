@@ -58,7 +58,7 @@ const SelectContainer = styled.div`
         border-right: 4px solid transparent;
         border-top: 4px solid ${({ theme}) => theme.colors.typography};
         right: 10px;
-        top: calc(50%-2px);
+        top: calc(50% - 2px);
     }
 `
 
@@ -76,6 +76,4 @@ const Select = styled.select`
     padding: 0 10px;
 `
 
-const Option = styled.option`
-    
-`
+const Option = styled.option``

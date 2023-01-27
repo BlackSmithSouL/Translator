@@ -17,15 +17,16 @@ export const TranslatorScreen: React.FunctionComponent<TranslatorScreenProps> = 
     const {
         query,
         setQuery,
-        selectedLanguages,
-        setSelectedLanguages,
-        debouncedAction,
+        isTranslatingText,
+        translatedText,
+        autoDetectedLanguage,
+        hasErrorTranslatingText,
         isDetectingLanguage,
         hasErrorDetectingLanguage,
-        isTranslatingText,
-        hasErrorTranslatingText,
-        autoDetectedLanguage,
-        translatedText,
+        debouncedAction,
+        setTranslatedText,
+        selectedLanguages,
+        setSelectedLanguages,
         setAutoDetectedLanguage
     } = useLibreTranslate()
 
@@ -51,7 +52,7 @@ export const TranslatorScreen: React.FunctionComponent<TranslatorScreenProps> = 
                             }
 
                             setQuery(newQuery)
-                            debouncedAction(newQuery)
+                            debouncedAction()
                         }}
                         placeholder={T.screens.translator.sourceInputPlaceholder}
                     />
@@ -70,7 +71,7 @@ export const TranslatorScreen: React.FunctionComponent<TranslatorScreenProps> = 
                                 source: autoDetectedLanguage?.language as LanguageCode
                             }))
                             setAutoDetectedLanguage(undefined)
-                            debouncedAction(query)
+                            debouncedAction()
                         }}
                     />
                     <TextCounter 
@@ -81,10 +82,13 @@ export const TranslatorScreen: React.FunctionComponent<TranslatorScreenProps> = 
                 </InputContainer>
                 <ExchangeLanguage 
                     hidden={selectedLanguages.source === LanguageCode.Auto}
-                    onClick={() =>  setSelectedLanguages(prevState => ({
+                    onClick={() => { setSelectedLanguages(prevState => ({
                         source: prevState.target,
                         target: prevState.source
-                    }))}
+                    }))
+                    setQuery('')
+                    setTranslatedText('')
+                    }}
                 />
                 <InputContainer>
                     <SelectLanguage 
@@ -95,11 +99,12 @@ export const TranslatorScreen: React.FunctionComponent<TranslatorScreenProps> = 
                             ...prevState,
                             target: newCode
                         }))}
+                        selectedLanguage={selectedLanguages.target}
                     />
                     <TextInput 
                         disabled
                         value={translatedText}
-                        hasError={!hasErrorTranslatingText} 
+                        hasError={hasErrorTranslatingText} 
                     />
                     <LoaderContainer>
                         {isTranslatingText && (

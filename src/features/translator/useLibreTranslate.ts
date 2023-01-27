@@ -8,9 +8,9 @@ export const useLibreTranslate = () => {
     const [translatedText, setTranslatedText] = useState<string>('')
     const [query, setQuery] = useState<string>('')
     const [autoDetectedLanguage, setAutoDetectedLanguage] = useState<AutoDetectedLanguage>()
-    const [selectedLanguages, setSelectedLanguages] = useState<SelectedLanguages> ({
+    const [selectedLanguages, setSelectedLanguages] = useState<SelectedLanguages>({
         source: LanguageCode.Auto,
-        target: LanguageCode.Chinese
+        target: LanguageCode.Polish
     })
     const { 
         isLoading: isDetectingLanguage, 
@@ -23,17 +23,17 @@ export const useLibreTranslate = () => {
         fetch: translateText
     } = useTranslateText(setTranslatedText)
     const debouncedAction = useDebouncedCallback(
-        debouncedQuery => {
-            if (debouncedQuery.length < 5) {
+        () => {
+            if (query.length < 5) {
                 return
             }
 
             selectedLanguages.source === LanguageCode.Auto
                 ? autoDetectLanguage({
-                    q: debouncedQuery
+                    q: query
                 })
                 : translateText({
-                    q: debouncedQuery,
+                    q: query,
                     source: selectedLanguages.source,
                     target: selectedLanguages.target,
                     format: 'text'
@@ -45,6 +45,7 @@ export const useLibreTranslate = () => {
     return {
         query,
         setQuery,
+        setTranslatedText,
         selectedLanguages,
         setSelectedLanguages,
         debouncedAction,

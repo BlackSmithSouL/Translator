@@ -26,24 +26,19 @@ export const useSupportedLanguages = (
 }
 
 export const useAutoDetectLanguage = (
-    onSuccess: (autoDetectedLanguage: Array<AutoDetectedLanguage>) => void
-) => {
-    useFetch<Array<AutoDetectedLanguage>,        AutoDetectedLanguageRequest>({
+    onSuccess: (autoDetectedLanguage: AutoDetectedLanguage) => void
+) => useFetch<Array<AutoDetectedLanguage>,        AutoDetectedLanguageRequest>({
         url: 'detect',
         method: HttpMethod.POST
     }, {
-        onSuccess: ([autoDetectLanguage]) => onSuccess(autoDetectLanguage)
+        onSuccess: ([autoDetectLanguage]) => onSuccess(autoDetectLanguage),
     })
-}
 
 export const useTranslateText = (
     onSuccess: (translatedText: string) => void
-) => {
-    useFetch<TranslateTextResponse, TranslateTextRequest>({
+) => useFetch<TranslateTextResponse, TranslateTextRequest>({
         url: 'translate',
         method: HttpMethod.POST
     }, {
         onSuccess: ({ translatedText }) => onSuccess(translatedText)
-    })
-}
-    
+    })    
